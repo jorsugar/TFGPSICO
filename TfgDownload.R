@@ -1,8 +1,10 @@
 #1- Bajando los archivos
 
+setwd("C:/Users/vito/Documents/GitHub/TFGPSICO")
+
 dir.create("trabajosFinales") #crea el directorio donde se van a bajar los archivos
 
-setwd("C:/Users/vito/Documents/trabajosFinales")
+setwd("C:/Users/vito/Documents/GitHub/TFGPSICO/trabajosFinales")
 
 
 library(xml2)
@@ -31,7 +33,7 @@ fechaDescarga
 
 #función para bajar los TFG
 descargar <- function (x){
-  dest <- "C:/Users/vito/Documents/TFG_PSICO/trabajosFinales/"     
+  dest <- "C:/Users/vito/Documents/GitHub/TFGPSICO/trabajosFinales/"     
   for (i in seq_along(x)){
     titSelec <- x[i]                                                               #itera por los títulos
     t <- html_session("http://sifp1.psico.edu.uy/trabajos-finales-publicos")       #creo una nueva sesión para scrapear
