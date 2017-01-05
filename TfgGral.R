@@ -79,3 +79,5 @@ nota <- as.numeric(nota)
 
 gral <- data.frame(titulo, fecha, formato, nombreTut, nombreRev, nota)
 
+write.csv(gral, "datosGenerales.csv")
+
