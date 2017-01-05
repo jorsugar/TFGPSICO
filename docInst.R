@@ -1,9 +1,17 @@
 
-library(xml2)
-library(rvest)
-library(dplyr)
+#Este script tiene por objeto generar un data frame con todos los docentes de la 
+#Facultad de Psicología de la Udelar divididos por instituto.
+#La información se extrae mediantes webs craping del directorio docente: http://www.psico.edu.uy/directorio
+#http://www.psico.edu.uy/directorio/fundamentos
+#http://www.psico.edu.uy/directorio/clinica
+#http://www.psico.edu.uy/directorio/educacion
+#http://www.psico.edu.uy/directorio/salud
+#http://www.psico.edu.uy/directorio/social
+
 
 ############################ Función pegar ##################################
+#Esta función permite generar una columna con el Instituto al que pertenece 
+#el docente al lado de la columna con su nombre completo
 
 pegar <- function(x, y){
   n <- length(x)
@@ -15,6 +23,9 @@ pegar <- function(x, y){
 }
 #############################################################################
 
+library(xml2)
+library(rvest)
+library(dplyr)
 
 #fundamentos
 Url <- read_html("http://psico.edu.uy/directorio/fundamentos")
@@ -94,6 +105,6 @@ sal <- pegar(salud, sa)
 
 #---------------------------------------------------------------
 
-docentes <- rbind(clin, soc, sal, funda, edu)
+docentes <- rbind(clin, soc, sal, funda, edu) #un instituto debajo de otro
 
 write.csv(docentes, file="docentesInst.csv")

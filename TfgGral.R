@@ -1,5 +1,9 @@
 
-#base general
+#Base general
+#El objetivo es armar el data set general con toda la info sobre los Trabajos Finales de Grado (TFG)
+#Para ello se utilizará web scraping con rvest el la URL: http://sifp1.psico.edu.uy/trabajos-finales-publicos
+
+
 
 library(xml2)
 library(rvest)
