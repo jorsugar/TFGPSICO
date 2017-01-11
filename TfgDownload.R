@@ -33,6 +33,7 @@ fechaDescarga
 
 #función para bajar los TFG
 descargar <- function (x){
+  cuatroF <- function(x){substr(x, nchar(x)-4+1, nchar(x))}
   dest <- "C:/Users/vito/Documents/GitHub/TFGPSICO/trabajosFinales/"     
   for (i in seq_along(x)){
     titSelec <- x[i]                                                               #itera por los títulos
@@ -44,9 +45,20 @@ descargar <- function (x){
     t <- t[2]                                                                      #selecciono el link 2 que es el que contiene el pdf del TFG
     incr <- i
     n <- as.character(incr)
-    n <-  paste(n, ".pdf", sep = "")
-    nombre <- paste (dest,n, sep = "") 
-    download.file(t, destfile = nombre, mode = "wb")                               #el mode wb es fundamental para que baje el pdf
+    if (cuatroF(t) == ".pdf") {
+      n <-  paste(n, ".pdf", sep = "")
+      nombre <- paste (dest,n, sep = "") 
+      download.file(t, destfile = nombre, mode = "wb")
+    } else if (cuatroF(t) == ".odt") {
+      n <-  paste(n, ".odt", sep = "")
+      nombre <- paste (dest,n, sep = "") 
+      download.file(t, destfile = nombre, mode = "wb")
+    }  
+    else {
+      n <-  paste(n, ".docx", sep = "")
+      nombre <- paste (dest,n, sep = "") 
+      download.file(t, destfile = nombre, mode = "wb")
+    }
   }
 }
 
