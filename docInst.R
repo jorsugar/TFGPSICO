@@ -1,7 +1,7 @@
 
 #Este script tiene por objeto generar un data frame con todos los docentes de la 
 #Facultad de Psicología de la Udelar divididos por instituto.
-#La información se extrae mediantes webs craping del directorio docente: http://www.psico.edu.uy/directorio
+#La información se extrae mediantes web scraping del directorio docente: http://www.psico.edu.uy/directorio
 #http://www.psico.edu.uy/directorio/fundamentos
 #http://www.psico.edu.uy/directorio/clinica
 #http://www.psico.edu.uy/directorio/educacion
@@ -42,7 +42,7 @@ funda <- pegar(fundamentos, f)
 
 #--------------------------------------------------------------
 
-#clinica
+#clínica
 Url <- read_html("http://psico.edu.uy/directorio/clinica")
 
 clinica <- Url %>%
@@ -73,7 +73,7 @@ soc <- pegar(social, so)
 
 #--------------------------------------------------------------
 
-#eduacion
+#eduación
 
 Url <- read_html("http://psico.edu.uy/directorio/educacion")
 

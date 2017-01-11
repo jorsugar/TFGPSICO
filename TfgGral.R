@@ -85,3 +85,30 @@ gral <- data.frame(titulo, fecha, formato, nombreTut, nombreRev, nota)
 
 write.csv(gral, "datosGenerales.csv")
 
+#---------------------------------------
+
+gral1 <- read.csv("datosGenerales.csv")
+
+
+nombreTut <- tolower(gral1$nombreTut)                                                 #pasa a minúscula toda la columna nombreTut
+nombreRev <- tolower(gral1$nombreRev)                                                 #pasa a minúscula toda la columna nombreRev
+
+library(dplyr)
+library(stringr)
+
+Tutor <- str_to_title(nombreTut)                                                       #crea un nuevo vector con la 1er letra en mayúscula
+Revisor <- str_to_title(nombreRev)                                                     #crea un nuevo vector con la 1er letra en mayúscula
+
+gral1 <- mutate(gral1, Tutor, Revisor)                                                 #agreaga los vectores creados como columnas al data frame
+gral1 <- select(gral1, -X, -nombreTut, -nombreRev)                                     #elimina las columnas que ya no sirven
+gral1 <- rename(gral1, Título = titulo, Fecha = fecha, Formato = formato, Nota = nota) #cambia el nombre de las columnas
+gral1 <- select(gral1, Título, Fecha, Formato, Tutor, Revisor, Nota)                   #reordena las columnas          
+
+View(gral1)
+
+write.csv(gral1, "datosGenerales.csv")
+
+
+
+
+
