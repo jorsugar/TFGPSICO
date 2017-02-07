@@ -1,7 +1,7 @@
 
 #Base general
 #El objetivo es armar el data set general con toda la info sobre los Trabajos Finales de Grado (TFG)
-#Para ello se utilizará web scraping con rvest el la URL: http://sifp1.psico.edu.uy/trabajos-finales-publicos
+#Para ello se utilizará web scraping con rvest en la URL: http://sifp1.psico.edu.uy/trabajos-finales-publicos
 
 
 
@@ -1555,4 +1555,47 @@ gral4 <- select(gral4, Título, Fecha, Formato, idTutor, Tutor,
 
 write.csv(gral4, "datosGenerales.csv")
 
+#---------------------------------------------------------------------
+
+#Se agrega la columna Institutos al que pertenecen los docentes que son revisores
+
+library(dplyr)
+
+
+gral5 <- read.csv("datosGenerales.csv")
+t <- paste( gral5$idTutor, gral5$Instit_Tutor, sep = " ")
+head(t)
+length(t)
+Instit_Revisor <- gral5$idRevisor
+Instit_Revisor <- as.character(Instit_Revisor)
+head(Instit_Revisor)
+length(Instit_Revisor)
+
+
+Instit_Revisor[Instit_Revisor %in% substr(t, 1, 4)] <- t[match(Instit_Revisor, substr(t, 1, 4), nomatch=FALSE)]
+
+gral5 <- mutate(gral5, Instit_Revisor) 
+
+write.csv(gral5, "datosGenerales.csv")
+
+
+
+
+library(stringr)
+
+d <- gral5$Instit_Revisor
+d <- as.character(d)
+d <- str_sub(d, 6, nchar(d))
+Instit_Revisor <- d
+gral5 <- select(gral5, -Instit_Revisor)
+gral5 <- mutate(gral5, Instit_Revisor)
+gral5 <- select(gral5, Título, Fecha, Formato, idTutor, Tutor, 
+                Instit_Tutor, idRevisor, Revisor, Instit_Revisor, Nota)
+write.csv(gral5, "datosGenerales.csv")
+  
+  
+  
+  
+
+  
 
